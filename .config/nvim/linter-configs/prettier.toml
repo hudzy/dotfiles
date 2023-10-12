@@ -1,0 +1,9 @@
+printWidth = 80
+tabWidth = 2
+useTabs = false
+trailingComma = "all"
+bracketSpacing = true
+bracketSameLine = false
+semi = true
+singleQuote = false
+endOfLine = "lf"
