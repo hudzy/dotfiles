@@ -17,10 +17,22 @@ require("conform").setup({
     ["_"] = { "trim_newlines", "trim_whitespace" },
     -- ["*"] = { "codespell" },
   },
-  -- format_on_save = {
-  --   timeout_ms = 1000,
-  --   lsp_fallback = false,
-  -- },
+})
+
+-- format_on_save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function(args)
+    if vim.bo.filetype ~= "sh" and vim.bo.filetype ~= "bash" then -- ignore formatting for shell scripts
+      require("conform").format({
+        async = false,
+        lsp_fallback = false,
+        timeout_ms = 1000,
+        bufnr = args.buf,
+        -- formatters = { "codespell", "trim_newlines", "trim_whitespace" },
+      })
+    end
+  end,
 })
 
 -- add a sleep to fix :wq exit error code 134
@@ -71,7 +83,11 @@ vim.api.nvim_create_user_command("ConformFormat", function(args)
       ["end"] = { args.line2, end_line:len() },
     }
   end
-  require("conform").format({ async = false, lsp_fallback = false, range = range })
+  require("conform").format({
+    async = false,
+    lsp_fallback = false,
+    range = range,
+  })
 end, { range = true })
 vim.keymap.set({ "n", "v" }, "<leader>F", vim.cmd.ConformFormat)
 

@@ -126,6 +126,12 @@ return require("packer").startup(function(use)
   -- highlight trailing spaces
   use("ntpeters/vim-better-whitespace")
 
+  -- highlight go.mod
+  use("maralla/gomod.vim")
+
+  -- live colorizer
+  use("NvChad/nvim-colorizer.lua")
+
   --- Experimental
   -- tabline
   -- use({
@@ -135,4 +141,16 @@ return require("packer").startup(function(use)
 
   -- auto no highlight after search
   -- use("romainl/vim-cool")
+
+  -- GitHub CoPilot
+  -- use("github/copilot.vim")
+  use("zbirenbaum/copilot.lua")
+
+  use({
+    "zbirenbaum/copilot-cmp",
+    after = { "copilot.lua" },
+    config = function()
+      require("copilot_cmp").setup()
+    end,
+  })
 end)

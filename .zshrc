@@ -14,13 +14,13 @@ plugins=(
   zsh-autosuggestions
   zsh-syntax-highlighting
   fzf-tab
-  zsh-fzf-history-search
 )
 
 # Homebrew
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
 export HOMEBREW_NO_INSTALL_UPGRADE=1
+export HOMEBREW_CASK_OPTS="--no-quarantine"
 
 # Oh-my-zsh
 ## misc
@@ -95,10 +95,6 @@ export FZF_CTRL_R_OPTS='--height 80% --layout=reverse --border'
 # fzf-tab
 zstyle ':fzf-tab:*' fzf-pad 4
 zstyle ':fzf-tab:*' fzf-min-height 4
-
-# zsh-fzf-history-search
-# export ZSH_FZF_HISTORY_SEARCH_FZF_ARGS="+s +m --exact --extended --preview-window=hidden"
-export ZSH_FZF_HISTORY_SEARCH_FZF_ARGS="--extended --preview-window=hidden"
 
 # tmux
 alias tnew='tmux -f ~/.tmux.conf new-session \; split-window -h \; split-window -v \; attach'

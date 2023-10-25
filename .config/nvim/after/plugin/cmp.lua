@@ -15,8 +15,12 @@ cmp.setup({
     expandable_indicator = true,
     fields = { "kind", "abbr" },
     format = function(entry, vim_item)
-      local kind =
-        require("lspkind").cmp_format({ mode = "symbol", maxwidth = 33, ellipsis_char = "..." })(entry, vim_item)
+      local kind = require("lspkind").cmp_format({
+        mode = "symbol",
+        maxwidth = 33,
+        ellipsis_char = "...",
+        symbol_map = { Copilot = "" },
+      })(entry, vim_item)
       local strings = vim.split(kind.kind, "%s", { trimempty = true })
       kind.kind = " " .. (strings[1] or "") .. " "
 
@@ -27,10 +31,11 @@ cmp.setup({
     completeopt = "menu,menuone,noinsert",
   },
   sources = {
-    { name = "nvim_lsp", group_index = 1 },
-    { name = "nvim_lua", group_index = 1 },
-    { name = "path", group_index = 1 },
-    { name = "buffer", max_item_count = 15, group_index = 1 },
+    { name = "copilot", group_index = 2 }, --copilot source
+    { name = "nvim_lsp", group_index = 2 },
+    { name = "nvim_lua", group_index = 2 },
+    { name = "path", group_index = 2 },
+    { name = "buffer", max_item_count = 15, group_index = 2 },
   },
   mapping = cmp.mapping.preset.insert({
     -- `Enter` key to confirm completion

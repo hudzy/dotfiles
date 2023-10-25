@@ -177,7 +177,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()
     vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#00afff", bold = false })
     vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#d7005f", bold = false })
-    vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#ffffff", bg = "#444444", bold = true })
+    vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#D4D4D4", bg = "#444444", bold = true })
     vim.api.nvim_set_hl(0, "CursorLine", { bg = "#444444" })
     vim.api.nvim_set_hl(0, "CursorColumn", { bg = "#444444" })
     vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#303030" })
@@ -208,6 +208,8 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "NvimTreeRootFolder", { fg = "#f38ba8", bold = true })
     vim.api.nvim_set_hl(0, "@function.builtin.bash", {}) -- clear default bash keyword highlight
     vim.api.nvim_set_hl(0, "@namespace", { link = "Function" }) -- change default namespace highlight
+    vim.api.nvim_set_hl(0, "@text.uri", { fg = "#89dceb", underline = true }) -- change default uri highlight
+    vim.api.nvim_set_hl(0, "MsgArea", { fg = "#D4D4D4" })
   end,
 })
 
