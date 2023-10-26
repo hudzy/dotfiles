@@ -41,7 +41,8 @@ require("nvim-tree").setup({
     cmd = "safe-rm -rf",
   },
   filters = {
-    dotfiles = true,
+    git_ignored = false,
+    dotfiles = false,
   },
 })
 
