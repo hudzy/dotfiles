@@ -13,6 +13,7 @@ require("conform").setup({
     -- shellharden is a strict version of shellcheck
     sh = { "shellharden", "shfmt" }, -- brew install shellharden shfmt
     bash = { "shellharden", "shfmt" },
+    zsh = { "shellharden", "shfmt" },
     sql = { "sql_formatter" }, -- npm install sql-formatter -g
     ["_"] = { "trim_newlines", "trim_whitespace" },
     -- ["*"] = { "codespell" },
@@ -23,7 +24,7 @@ require("conform").setup({
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
   callback = function(args)
-    if vim.bo.filetype ~= "sh" and vim.bo.filetype ~= "bash" then -- ignore formatting for shell scripts
+    if vim.bo.filetype ~= "sh" and vim.bo.filetype ~= "bash" and vim.bo.filetype ~= "zsh" then -- ignore formatting for shell scripts
       require("conform").format({
         async = false,
         lsp_fallback = false,

@@ -49,15 +49,23 @@ require("mason-lspconfig").setup({
     "tsserver",
     "vimls",
     "yamlls",
-    -- 'groovyls', -- not very useful
   },
   handlers = {
     lsp_zero.default_setup,
+
+    bashls = function()
+      -- (Optional) use bashls for zsh filetype
+      require("lspconfig").bashls.setup({
+        filetypes = { "sh", "bash", "zsh" },
+      })
+    end,
+
     lua_ls = function()
       -- (Optional) configure lua language server
       local lua_opts = lsp_zero.nvim_lua_ls()
       require("lspconfig").lua_ls.setup(lua_opts)
     end,
+
     yamlls = function()
       local schema_path = vim.fs.find("yamlls-schemas", { path = "~/.config/nvim/", type = "directory" })[1]
       require("lspconfig").yamlls.setup({

@@ -14,8 +14,8 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "<leader>a", "ggVG")
 vim.keymap.set("n", "<leader>y", "ggVGy")
 -- vsplit and hsplit
-vim.keymap.set("n", "<leader>g", vim.cmd.vsplit)
-vim.keymap.set("n", "<leader>G", vim.cmd.split)
+-- vim.keymap.set("n", "<leader>g", vim.cmd.vsplit)
+-- vim.keymap.set("n", "<leader>G", vim.cmd.split) -- conflict with fugitive
 -- quicker new tab
 vim.keymap.set("n", "<C-t>", vim.cmd.tabnew)
 -- quicker tab navigation, move to the previous/next tabpage

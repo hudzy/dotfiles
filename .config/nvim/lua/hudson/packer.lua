@@ -129,23 +129,13 @@ return require("packer").startup(function(use)
   -- highlight go.mod
   use("maralla/gomod.vim")
 
-  -- live colorizer
+  -- live HEX code colorizer
   use("NvChad/nvim-colorizer.lua")
 
-  --- Experimental
-  -- tabline
-  -- use({
-  --   "willothy/nvim-cokeline",
-  --   requires = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" },
-  -- })
-
-  -- auto no highlight after search
-  -- use("romainl/vim-cool")
-
   -- GitHub CoPilot
-  -- use("github/copilot.vim")
+  --- 1. lua replacement for github/copilot.vim
   use("zbirenbaum/copilot.lua")
-
+  --- 2. turn github copilot into a cmp source
   use({
     "zbirenbaum/copilot-cmp",
     after = { "copilot.lua" },
@@ -153,4 +143,11 @@ return require("packer").startup(function(use)
       require("copilot_cmp").setup()
     end,
   })
+
+  --- Experimental
+  -- tabline
+  -- use({
+  --   "willothy/nvim-cokeline",
+  --   requires = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" },
+  -- })
 end)
