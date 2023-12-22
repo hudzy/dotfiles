@@ -48,7 +48,12 @@ vim.keymap.set("n", "<leader><leader>", vim.cmd.so)
 -- quicker :PackerSync
 vim.keymap.set("n", "<leader><leader><leader>", vim.cmd.PackerSync)
 -- exit terminal buffer insert mode
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
+vim.keymap.set("t", "<C-j><C-j>", [[<C-\><C-n>]])
+-- exit insert mode
+vim.keymap.set("i", "<C-j><C-j>", [[<C-\><C-n>]])
+-- quicker exit
+vim.keymap.set("n", "<C-j><C-j>", ":x<CR>")
+vim.keymap.set("n", "<C-k><C-k>", ":qa!<CR>")
 -- toggle wrap
 vim.keymap.set("n", "<leader>W", function()
   vim.cmd("set wrap!")
@@ -105,7 +110,7 @@ vim.api.nvim_create_autocmd("CmdLineLeave", {
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.termguicolors = true
-vim.opt.timeoutlen = 1200
+vim.opt.timeoutlen = 800
 vim.opt.updatetime = 50
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
@@ -134,7 +139,7 @@ vim.opt.undodir = { conf_dir .. "/.nvimundo//" }
 vim.opt.swapfile = false
 --vim.opt.directory = { conf_dir .. "/.nvimswp//"}
 
--- set nowrap for kubeconfig files and Jenkinsfiles and helm chart yamls
+-- set nowrap for kubeconfig files and helm chart yamls
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = {
     "*/.kube/config*",
@@ -142,12 +147,22 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     "*templates/*.yml",
   },
   callback = function()
-    vim.cmd("setlocal filetype=yaml")
     vim.cmd("setlocal nowrap")
   end,
 })
 
--- set filetype as Groovy for all Jenkinsfiles
+--- fix calling yamlls LSP server for helm filetype
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = {
+    "*templates/*.yaml",
+    "*templates/*.yml",
+    "*templates/*.tpl",
+    "*.gotmpl",
+  },
+  command = "setlocal filetype=helm",
+})
+
+-- set filetype as Groovy and nowrap for all Jenkinsfiles
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "*Jenkinsfile*",
   callback = function()
@@ -160,6 +175,15 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "*/tutorials/*.txt",
   command = "setlocal filetype=bash",
+})
+
+--- set python requirement.txt and .env filetype to config
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = {
+    "*.env",
+    "requirement*.txt",
+  },
+  command = "setlocal filetype=config",
 })
 
 -- highlight yanked text
@@ -211,26 +235,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "@text.uri", { fg = "#89dceb", underline = true }) -- change default uri highlight
     vim.api.nvim_set_hl(0, "MsgArea", { fg = "#D4D4D4" })
   end,
-})
-
---- fix calling yamlls LSP server for helm filetype
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  pattern = {
-    "*templates/*.yaml",
-    "*templates/*.yml",
-    "*templates/*.tpl",
-    "*.gotmpl",
-  },
-  command = "setlocal filetype=helm",
-})
-
---- set python requirement.txt and .env filetype to config
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  pattern = {
-    "*.env",
-    "requirement*.txt",
-  },
-  command = "setlocal filetype=config",
 })
 
 -- Experimental

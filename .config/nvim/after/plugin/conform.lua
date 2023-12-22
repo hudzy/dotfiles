@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
       require("conform").format({
         async = false,
         lsp_fallback = false,
-        timeout_ms = 1000,
+        timeout_ms = 3000,
         bufnr = args.buf,
         -- formatters = { "codespell", "trim_newlines", "trim_whitespace" },
       })
@@ -85,8 +85,9 @@ vim.api.nvim_create_user_command("ConformFormat", function(args)
     }
   end
   require("conform").format({
-    async = false,
+    async = true,
     lsp_fallback = false,
+    timeout_ms = 3000,
     range = range,
   })
 end, { range = true })

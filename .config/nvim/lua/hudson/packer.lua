@@ -46,6 +46,11 @@ return require("packer").startup(function(use)
   -- toggle terminal
   use("s1n7ax/nvim-terminal")
 
+  -- calling lazygit from within neovim
+  use({
+    "kdheepak/lazygit.nvim",
+    requires = "nvim-lua/plenary.nvim", -- optional for floating window border decoration
+  })
   -- enhanced sidebar registers
   use("junegunn/vim-peekaboo")
 
@@ -73,9 +78,6 @@ return require("packer").startup(function(use)
   -- toggling alternate boolean values
   use("rmagatti/alternate-toggler")
 
-  -- beautify comments using boxes and lines
-  use("LudoPinelli/comment-box.nvim")
-
   -- vim syntax for helm templates (yaml + gotmpl + sprig + custom)
   use("towolf/vim-helm")
 
@@ -90,6 +92,9 @@ return require("packer").startup(function(use)
 
   -- commenting
   use("preservim/nerdcommenter")
+
+  -- beautify comments using boxes and lines
+  use("LudoPinelli/comment-box.nvim")
 
   -- folding configuration for YAML
   use("pedrohdz/vim-yaml-folds")

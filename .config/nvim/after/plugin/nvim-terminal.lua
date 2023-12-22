@@ -47,3 +47,15 @@ require("nvim-terminal").setup({
     { keymap = "<leader>5" },
   },
 })
+
+-- disable whitespace, sign, colorcolumn, and enable insert mode for terminal buffers enter
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "*",
+  callback = function()
+    vim.opt.signcolumn = "no"
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+    vim.cmd("DisableWhitespace")
+    vim.cmd("startinsert")
+  end,
+})
