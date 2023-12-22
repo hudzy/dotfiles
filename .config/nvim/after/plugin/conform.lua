@@ -45,7 +45,7 @@ vim.api.nvim_create_autocmd({ "VimLeave" }, {
 })
 
 -- set custom config for stylua
-require("conform.formatters.stylua").args = function(ctx)
+require("conform.formatters.stylua").args = function()
   local args = { "--search-parent-directories", "--stdin-filepath", "$FILENAME", "-" }
   local found = vim.fs.find("stylua.toml", { path = "~/.config/nvim/linter-configs/" })[1]
   if found then
@@ -55,7 +55,7 @@ require("conform.formatters.stylua").args = function(ctx)
 end
 
 -- set custom config for prettier
-require("conform.formatters.prettier").args = function(ctx)
+require("conform.formatters.prettier").args = function()
   local args = { "--stdin-filepath", "$FILENAME" }
   local found = vim.fs.find("prettier.toml", { path = "~/.config/nvim/linter-configs/" })[1]
   if found then
@@ -65,7 +65,7 @@ require("conform.formatters.prettier").args = function(ctx)
 end
 
 -- set custom config for codespell
-require("conform.formatters.codespell").args = function(ctx)
+require("conform.formatters.codespell").args = function()
   local args = { "$FILENAME", "--write-changes", "--check-hidden" }
   local found = vim.fs.find("codespell-ignore-words", { path = "~/.config/nvim/linter-configs/" })[1]
   if found then
